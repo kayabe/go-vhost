@@ -1,4 +1,10 @@
 # go-vhost
+
+[![Actions Status](https://github.com/kayabe/go-vhost/workflows/test/badge.svg)](https://github.com/kayabe/go-vhost/actions)
+[![Coverage Status](https://coveralls.io/repos/github/kayabe/go-vhost/badge.svg?branch=master)](https://coveralls.io/github/kayabe/go-vhost?branch=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/kayabe/go-vhost)](https://goreportcard.com/report/github.com/kayabe/go-vhost)
+[![](https://godoc.org/github.com/kayabe/go-vhost?status.svg)](https://pkg.go.dev/github.com/kayabe/go-vhost?tab=doc)
+
 go-vhost is a simple library that lets you implement virtual hosting functionality for different protocols (HTTP and TLS so far). go-vhost has a high-level and a low-level interface. The high-level interface lets you wrap existing net.Listeners with "muxer" objects. You can then Listen() on a muxer for a particular virtual host name of interest which will return to you a net.Listener for just connections with the virtual hostname of interest.
 
 The lower-level go-vhost interface are just functions which extract the name/routing information for the given protocol and return an object implementing net.Conn which works as if no bytes had been consumed.
