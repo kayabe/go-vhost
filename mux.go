@@ -126,14 +126,14 @@ func (m *VhostMuxer) handle(conn net.Conn) {
 
 	// Make sure we detect dead connections while we decide how to multiplex
 	if err := conn.SetDeadline(time.Now().Add(m.muxTimeout)); err != nil {
-		m.sendError(conn, fmt.Errorf("Failed to set deadline: %v", err))
+		m.sendError(conn, fmt.Errorf("failed to set deadline: %v", err))
 		return
 	}
 
 	// extract the name
 	vconn, err := m.vhostFn(conn)
 	if err != nil {
-		m.sendError(conn, BadRequest{fmt.Errorf("Failed to extract vhost name: %v", err)})
+		m.sendError(conn, BadRequest{fmt.Errorf("failed to extract vhost name: %v", err)})
 		return
 	}
 
@@ -148,7 +148,7 @@ func (m *VhostMuxer) handle(conn net.Conn) {
 	}
 
 	if err = vconn.SetDeadline(time.Time{}); err != nil {
-		m.sendError(vconn, fmt.Errorf("Failed unset connection deadline: %v", err))
+		m.sendError(vconn, fmt.Errorf("failed unset connection deadline: %v", err))
 		return
 	}
 

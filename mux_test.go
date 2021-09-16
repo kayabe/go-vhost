@@ -89,7 +89,7 @@ func TestHTTPMux(t *testing.T) {
 
 	resp, err = new(http.Client).Do(req)
 	if err != nil {
-		t.Fatalf("failed to make HTTP request", err)
+		t.Fatalf("failed to make HTTP request: %s", err)
 	}
 
 	body, err := ioutil.ReadAll(resp.Body)
@@ -123,14 +123,14 @@ func testMux(t *testing.T, listen, dial string) {
 	go func() {
 		conn, err := l.Accept()
 		if err != nil {
-			t.Fatalf("failed to accept connection: %v", err)
+			t.Errorf("failed to accept connection: %v", err)
 			return
 		}
 
 		got := conn.(Conn).Host()
 		expected := dial
 		if got != expected {
-			t.Fatalf("got connection with unexpected host. got: %s, expected: %s", got, expected)
+			t.Errorf("got connection with unexpected host. got: %s, expected: %s", got, expected)
 			return
 		}
 
@@ -140,7 +140,7 @@ func testMux(t *testing.T, listen, dial string) {
 	go func() {
 		_, err := mux.NextError()
 		if err != nil {
-			t.Fatalf("muxing error: %v", err)
+			t.Errorf("muxing error: %v", err)
 		}
 	}()
 
@@ -186,7 +186,7 @@ func (fakeNetConn) SetDeadline(time.Time) error { return nil }
 type fakeListener chan struct{}
 
 func (l fakeListener) Accept() (net.Conn, error) {
-	for _ = range l {
+	for range l {
 		return fakeNetConn{nil}, nil
 	}
 	select {}
