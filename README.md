@@ -1,6 +1,6 @@
 # go-vhost
 
-[![Actions Status](https://github.com/kayabe/go-vhost/workflows/test/badge.svg)](https://github.com/kayabe/go-vhost/actions)
+[![Actions Status](https://github.com/kayabe/go-vhost/workflows/Go/badge.svg)](https://github.com/kayabe/go-vhost/actions)
 [![Coverage Status](https://coveralls.io/repos/github/kayabe/go-vhost/badge.svg?branch=master)](https://coveralls.io/github/kayabe/go-vhost?branch=master)
 [![Go Report Card](https://goreportcard.com/badge/github.com/kayabe/go-vhost)](https://goreportcard.com/report/github.com/kayabe/go-vhost)
 [![](https://godoc.org/github.com/kayabe/go-vhost?status.svg)](https://pkg.go.dev/github.com/kayabe/go-vhost?tab=doc)
