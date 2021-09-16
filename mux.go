@@ -247,8 +247,8 @@ func (m *HTTPMuxer) HandleError(conn net.Conn, err error) {
 
 // NewHTTPMuxer begins muxing HTTP connections on the given listener by inspecting
 // the HTTP Host header in new connections.
-func NewHTTPMuxer(listener net.Listener, muxTimeout time.Duration) (*HTTPMuxer, error) {
-	fn := func(c net.Conn) (Conn, error) { return HTTP(c) }
+func NewHTTPMuxer(listener net.Listener, muxTimeout time.Duration, closeBody bool) (*HTTPMuxer, error) {
+	fn := func(c net.Conn) (Conn, error) { return HTTP(c, closeBody) }
 	mux, err := NewVhostMuxer(listener, fn, muxTimeout)
 	return &HTTPMuxer{mux}, err
 }

@@ -34,7 +34,7 @@ func TestHTTPHost(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	c, err := HTTP(conn)
+	c, err := HTTP(conn, true)
 	if err != nil {
 		panic(err)
 	}

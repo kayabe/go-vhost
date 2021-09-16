@@ -13,7 +13,7 @@ type HTTPConn struct {
 
 // HTTP parses the head of the first HTTP request on conn and returns
 // a new, unread connection with metadata for virtual host muxing
-func HTTP(conn net.Conn) (httpConn *HTTPConn, err error) {
+func HTTP(conn net.Conn, closeBody bool) (httpConn *HTTPConn, err error) {
 	c, rd := newShared(conn)
 
 	httpConn = &HTTPConn{sharedConn: c}
@@ -21,9 +21,11 @@ func HTTP(conn net.Conn) (httpConn *HTTPConn, err error) {
 		return
 	}
 
-	// You probably don't need access to the request body and this makes the API
-	// simpler by allowing you to call Free() optionally
-	httpConn.Request.Body.Close()
+	if closeBody {
+		// You probably don't need access to the request body and this makes the API
+		// simpler by allowing you to call Free() optionally
+		httpConn.Request.Body.Close()
+	}
 
 	return
 }

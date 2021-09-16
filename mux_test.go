@@ -54,7 +54,7 @@ func localListener(t *testing.T) (net.Listener, string) {
 
 func TestHTTPMux(t *testing.T) {
 	l, port := localListener(t)
-	mux, err := NewHTTPMuxer(l, time.Second)
+	mux, err := NewHTTPMuxer(l, time.Second, true)
 	if err != nil {
 		t.Fatalf("failed to start muxer: %v", err)
 	}
